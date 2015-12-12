@@ -1,9 +1,8 @@
 // Animal Atlas Javascript Code
 
-var all_template, group_template;
+var all_template, group_template, slideshow_template;
 
-var current_group = animals_data.category[0],
-	current_group_id = animals_data.category[0].name;
+var current_index = 0;
 
 // Helper function to instantiate a template and display it in the content div
 function showTemplate(template, data) {
@@ -25,6 +24,9 @@ $(document).ready(function() {
 	source = $("#group-template").html();
 	group_template = Handlebars.compile(source);
 
+	source = $("#slideshow-template").html();
+	slideshow_template = Handlebars.compile(source);
+
 	
 	// Clicking Categories tab shows animals from all the categories
 
@@ -42,28 +44,42 @@ $(document).ready(function() {
 	// Default view
 	$("#all-tab").click();
 	
-	// Clicking Animals by Group tab shows animals of each group
+	// Clicking Reptiles tab shows animals of each group
 	$("#reptiles-tab").click(function() {
 
 		$(".nav-tabs .active").removeClass("active");
 		$("#reptiles-tab").addClass("active");
 
-		showTemplate(group_template, animals_data.category[0]);
+		current_index = 0;
+		showTemplate(group_template, animals_data.category[current_index]);
 	});
-		// Clicking Animals by Group tab shows animals of each group
+	// Clicking Mammals tab shows animals of each group
 	$("#mammals-tab").click(function() {
 
 		$(".nav-tabs .active").removeClass("active");
 		$("#mammals-tab").addClass("active");
 
-		showTemplate(group_template, animals_data.category[1]);
+		current_index = 1;
+		showTemplate(group_template, animals_data.category[current_index]);
 	});
-		// Clicking Animals by Group tab shows animals of each group
+	// Clicking Birds tab shows animals of each group
 	$("#birds-tab").click(function() {
 
 		$(".nav-tabs .active").removeClass("active");
 		$("#birds-tab").addClass("active");
 
-		showTemplate(group_template, animals_data.category[2]);
+		current_index = 2;
+		showTemplate(group_template, animals_data.category[current_index]);
+	});
+	// Clicking Slideshow tab displays all the images
+
+	$("#slideshow-tab").click(function() {
+		$(".nav-tabs .active").removeClass("active");
+		$("#slideshow-tab").addClass("active");
+
+		showTemplate(slideshow_template, animals_data.category[current_index]);
+		$('.carousel').carousel({
+			interval: 2000
+		});
 	});
 }); // end ready function
