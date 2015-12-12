@@ -41,16 +41,7 @@ $(document).ready(function() {
 
 	// Default view
 	$("#all-tab").click();
-	$(".click-reptiles").click(function() {
-		$("#reptiles-tab").click();
-	});
-	$(".click-mammals").click(function() {
-		$("#mammals-tab").click();
-	});
-	$(".click-birds").click(function() {
-		$("#birds-tab").click();
-	});
-
+	
 	// Clicking Animals by Group tab shows animals of each group
 	$("#reptiles-tab").click(function() {
 
