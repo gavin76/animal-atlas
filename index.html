@@ -1,23 +1,74 @@
-<!-- This is a first example of using a template -->
+<!DOCTYPE html>
+<!-- Week 4 Assignment: Animal Atlas -->
+<!-- Author: Gavin Chan -->
+<html>
+	<head>
+		<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Animal Atlas</title>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/handlebars-v3.0.3.js"></script>
 
-<head>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="AnimalsData.js"></script>
+		<script src="assignment.js"></script>
 
-<!-- include our libraries and css files -->
-
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="js/handlebars-v3.0.3.js"></script>
-
-<script src="js/bootstrap.min.js"></script>
-<script src="AnimalsData.js"></script>
-<script src="assignment.js"></script>
-
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="assignment.css" rel="stylesheet">
-
-</head>
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="assignment.css" rel="stylesheet">
+	</head>
 
 <body>
 
-    <!-- put your HTML here -->
+    <div class="container">
+
+    	<div class="page-header">
+    		<h1>Animal Atlas</h1>
+    	</div>
+		<div class="navbar-form navbar-right">
+		      <input id="searchbox" type="text" class="form-control" placeholder="Search...">
+		</div>
+    	<ul class="nav nav-tabs">
+            <li role="navigation" class="active"><a href="#" id="all-tab">All Animals</a></li>
+    		<li role="navigation"><a href="#" id="reptiles-tab">Reptiles</a></li>
+    		<li role="navigation"><a href="#" id="mammals-tab">Mammals</a></li>
+    		<li role="navigation"><a href="#" id="birds-tab">Birds</a></li>
+    	</ul>
+
+    	<div id="content" class="container" role="main">
+    	</div>
+
+    </div> <!-- /container -->
+
+    <!-- Template for Animal Category View -->
+    <script id="all-template" type="text/x-handlebars-template">
+
+        {{#category}}
+            {{#animals}}
+
+            <div class="row-header">
+                <h2>{{name}}</h2>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6">
+                    <img class="img-responsive" src={{image1}} alt={{name}}>
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    <img class="img-responsive" src={{image2}} alt={{name}}>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>Group: {{../name}}</h4>
+                    <p>{{description}}</p>
+                </div>
+            </div>
+            
+            {{/animals}}
+        {{/category}}
+
+
+        </script>
 
 </body>
+</html>
