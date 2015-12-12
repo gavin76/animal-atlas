@@ -31,8 +31,9 @@
     	<ul class="nav nav-tabs">
             <li role="navigation" class="active"><a href="#" id="all-tab">All Animals</a></li>
     		<li role="navigation"><a href="#" id="reptiles-tab">Reptiles</a></li>
-    		<li role="navigation"><a href="#" id="mammals-tab">Mammals</a></li>
-    		<li role="navigation"><a href="#" id="birds-tab">Birds</a></li>
+            <li role="navigation"><a href="#" id="mammals-tab">Mammals</a></li>
+            <li role="navigation"><a href="#" id="birds-tab">Birds</a></li>
+    		<li role="navigation"><a href="#" id="slideshow-tab">Slideshow</a></li>
     	</ul>
 
     	<div id="content" class="container" role="main">
@@ -67,8 +68,31 @@
             {{/animals}}
         {{/category}}
 
+    </script>
 
-        </script>
+    <!-- Template for Animals by Group View -->
+    <script id="group-template" type="text/x-handlebars-template">
+
+        {{#animals}}
+        <div class="row-header">
+            <h2>{{name}}</h2>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-6">
+                <img class="img-responsive" src={{image1}} alt={{name}}>
+            </div>
+            <div class="col-xs-6 col-md-6">
+                <img class="img-responsive" src={{image2}} alt={{name}}>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <p>{{description}}</p>
+            </div>
+        </div>
+        {{/animals}}
+
+    </script>
 
 </body>
 </html>

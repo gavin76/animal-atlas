@@ -1,9 +1,9 @@
 // Animal Atlas Javascript Code
 
-var all_template;
+var all_template, group_template;
 
-var current_category = animals_data.category[0];
-var current_animal = current_category.animals[0];
+var current_group = animals_data.category[0],
+	current_group_id = animals_data.category[0].name;
 
 // Helper function to instantiate a template and display it in the content div
 function showTemplate(template, data) {
@@ -13,16 +13,24 @@ function showTemplate(template, data) {
 
 $(document).ready(function() {
 
+	// Register Helper
+	Handlebars.registerHelper('parseId', function(text) {
+  		return new Handlebars.SafeString("click-" + text.toLowerCase());
+	});
+
 	// Compile templates for use
 	var source = $("#all-template").html();
-	categories_template = Handlebars.compile(source);
+	all_template = Handlebars.compile(source);
+
+	source = $("#group-template").html();
+	group_template = Handlebars.compile(source);
 
 	
-	// Clicking Categories tab shows thumbnails of all the categories
+	// Clicking Categories tab shows animals from all the categories
 
 	$("#all-tab").click(function() {
 
-		showTemplate(categories_template, animals_data);
+		showTemplate(all_template, animals_data);
 
 		$(".nav-tabs .active").removeClass("active");
 		$("#all-tab").addClass("active");
@@ -33,5 +41,38 @@ $(document).ready(function() {
 
 	// Default view
 	$("#all-tab").click();
+	$(".click-reptiles").click(function() {
+		$("#reptiles-tab").click();
+	});
+	$(".click-mammals").click(function() {
+		$("#mammals-tab").click();
+	});
+	$(".click-birds").click(function() {
+		$("#birds-tab").click();
+	});
 
+	// Clicking Animals by Group tab shows animals of each group
+	$("#reptiles-tab").click(function() {
+
+		$(".nav-tabs .active").removeClass("active");
+		$("#reptiles-tab").addClass("active");
+
+		showTemplate(group_template, animals_data.category[0]);
+	});
+		// Clicking Animals by Group tab shows animals of each group
+	$("#mammals-tab").click(function() {
+
+		$(".nav-tabs .active").removeClass("active");
+		$("#mammals-tab").addClass("active");
+
+		showTemplate(group_template, animals_data.category[1]);
+	});
+		// Clicking Animals by Group tab shows animals of each group
+	$("#birds-tab").click(function() {
+
+		$(".nav-tabs .active").removeClass("active");
+		$("#birds-tab").addClass("active");
+
+		showTemplate(group_template, animals_data.category[2]);
+	});
 }); // end ready function
