@@ -1,1 +1,10 @@
 /* put your css code here */
+
+ol {
+	list-style-type: none;
+}
+h3 {
+	color: #bb2000;
+}
+.container {
+	padding-top: 30px;

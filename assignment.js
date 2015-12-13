@@ -1,6 +1,6 @@
 // Animal Atlas Javascript Code
 
-var all_template, group_template, slideshow_template;
+var about_template, all_template, group_template, slideshow_template,slide_nav_template;
 
 var current_index = 0;
 
@@ -27,59 +27,129 @@ $(document).ready(function() {
 	source = $("#slideshow-template").html();
 	slideshow_template = Handlebars.compile(source);
 
+	source = $("#about-template").html();
+	about_template = Handlebars.compile(source);
+
+	source = $("#slide-nav-template").html();
+	slide_nav_template = Handlebars.compile(source);
 	
-	// Clicking Categories tab shows animals from all the categories
+	// About Page
+
+	$("#about").click(function() {
+		$("#slide-nav").html("");
+		showTemplate(about_template, animals_data);
+
+		$(".navbar-nav .active").removeClass("active");
+
+	});
+
+	// Default view
+	$("#about").click();
+	
+	// All Animals Tab
 
 	$("#all-tab").click(function() {
-
+		$("#slide-nav").html("");
 		showTemplate(all_template, animals_data);
 
-		$(".nav-tabs .active").removeClass("active");
+		$(".navbar-nav .active").removeClass("active");
 		$("#all-tab").addClass("active");
 
 		console.log("Currently in all-tab");
 
-	}); // end all-tab.click
+	});
 
-	// Default view
-	$("#all-tab").click();
-	
-	// Clicking Reptiles tab shows animals of each group
+	// Reptiles Category tab
 	$("#reptiles-tab").click(function() {
-
-		$(".nav-tabs .active").removeClass("active");
+		$("#slide-nav").html("");
+		$(".navbar-nav .active").removeClass("active");
 		$("#reptiles-tab").addClass("active");
 
 		current_index = 0;
 		showTemplate(group_template, animals_data.category[current_index]);
 	});
-	// Clicking Mammals tab shows animals of each group
+	// Mammals Category tab
 	$("#mammals-tab").click(function() {
-
-		$(".nav-tabs .active").removeClass("active");
+		$("#slide-nav").html("");
+		$(".navbar-nav .active").removeClass("active");
 		$("#mammals-tab").addClass("active");
 
 		current_index = 1;
 		showTemplate(group_template, animals_data.category[current_index]);
 	});
-	// Clicking Birds tab shows animals of each group
+	// Birds Category tab
 	$("#birds-tab").click(function() {
-
-		$(".nav-tabs .active").removeClass("active");
+		$("#slide-nav").html("");
+		$(".navbar-nav .active").removeClass("active");
 		$("#birds-tab").addClass("active");
 
 		current_index = 2;
 		showTemplate(group_template, animals_data.category[current_index]);
 	});
-	// Clicking Slideshow tab displays all the images
+	
+	// Slideshow tab and nav
+	
 
 	$("#slideshow-tab").click(function() {
-		$(".nav-tabs .active").removeClass("active");
+		$(".navbar-nav .active").removeClass("active");
 		$("#slideshow-tab").addClass("active");
 
-		showTemplate(slideshow_template, animals_data.category[current_index]);
-		$('.carousel').carousel({
-			interval: 2000
+		$("#slide-nav").html(slide_nav_template);
+
+		
+
+		$("#slide-reptiles").click(function() {
+			$(".nav-tabs .active").removeClass("active");
+			$("#slide-reptiles").addClass("active");
+
+			current_index = 0;
+			console.log("Clicked reptile");
+
+			showTemplate(slideshow_template, animals_data.category[current_index]);
+			$('.carousel').carousel({
+				interval: 2000
+			});
 		});
+
+		$("#slide-mammals").click(function() {
+			$(".nav-tabs .active").removeClass("active");
+			$("#slide-mammals").addClass("active");
+
+			current_index = 1;
+			console.log("Clicked mammals");
+
+			showTemplate(slideshow_template, animals_data.category[current_index]);
+			$('.carousel').carousel({
+				interval: 2000
+			});
+		});
+
+		$("#slide-birds").click(function() {
+			$(".nav-tabs .active").removeClass("active");
+			$("#slide-birds").addClass("active");
+
+			current_index = 2;
+			console.log("Clicked birds");
+
+			showTemplate(slideshow_template, animals_data.category[current_index]);
+			$('.carousel').carousel({
+				interval: 2000
+			});
+		});
+		
+		console.log(current_index);
+		switch(current_index) {
+			case 0: 
+				$("#slide-reptiles").click();
+				break;
+			case 1: 
+				$("#slide-mammals").click();
+				break;
+			case 2: 
+				$("#slide-birds").click();
+				break;
+			default: console.log("Error");
+		}
 	});
+	
 }); // end ready function
