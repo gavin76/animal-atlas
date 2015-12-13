@@ -96,14 +96,11 @@ $(document).ready(function() {
 
 		$("#slide-nav").html(slide_nav_template);
 
-		
-
 		$("#slide-reptiles").click(function() {
 			$(".nav-tabs .active").removeClass("active");
 			$("#slide-reptiles").addClass("active");
 
 			current_index = 0;
-			console.log("Clicked reptile");
 
 			showTemplate(slideshow_template, animals_data.category[current_index]);
 			$('.carousel').carousel({
@@ -116,7 +113,6 @@ $(document).ready(function() {
 			$("#slide-mammals").addClass("active");
 
 			current_index = 1;
-			console.log("Clicked mammals");
 
 			showTemplate(slideshow_template, animals_data.category[current_index]);
 			$('.carousel').carousel({
@@ -129,15 +125,14 @@ $(document).ready(function() {
 			$("#slide-birds").addClass("active");
 
 			current_index = 2;
-			console.log("Clicked birds");
 
 			showTemplate(slideshow_template, animals_data.category[current_index]);
 			$('.carousel').carousel({
 				interval: 2000
 			});
 		});
-		
-		console.log(current_index);
+
+		// Change slide show according to current animal category
 		switch(current_index) {
 			case 0: 
 				$("#slide-reptiles").click();
